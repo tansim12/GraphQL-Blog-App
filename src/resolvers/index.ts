@@ -1,15 +1,11 @@
-const userData = [
-  {
-    name: "name",
-    email: "a@gmail.com",
-  },
-];
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const resolvers = {
   Query: {
-    user: () => userData,
+    user: async (parent: any, args: any, context: any) => {
+      return await prisma.user.findMany();
+    },
   },
   Mutation: {
     signup: async (parent: any, args: any, context: any) => {
